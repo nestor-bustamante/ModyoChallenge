@@ -1,0 +1,18 @@
+<header class=" sticky-top header__bd-navbar">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8 col-sm-12">
+        <h1>Modyo Challenge @if ( getName.length > 0 ) { <span>| {{ getName }}</span> }</h1>
+      </div>
+      @if ( getName.length > 0 ) {
+        <div class="col-md-2 col-sm-6">
+          <h3 class="header__bd-navbar__success">Asserts: {{ getPositive }}</h3>
+        </div>
+        <div class="col-md-2 col-sm-6">
+          <h3 class="header__bd-navbar__errors">Errors: {{ getNegative }}</h3>
+        </div>
+      }
+
+    </div>
+  </div>
+</header>

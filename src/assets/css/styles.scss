@@ -1,0 +1,168 @@
+@import "bootstrap/scss/bootstrap";
+@import "_keyframes";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+  --size-base: 1.6rem;
+  --font-family: "DM Sans", sans-serif;
+  --color-primary: #3dc681;
+  --color-base: #151f38;
+  --color-white: #fff;
+  --color-grey: #A1A5AF;
+  --bs-gutter-x: calc(var(--size-base) * .5);
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font: normal var(--size-base) var(--font-family);
+  text-rendering: optimizeLegibility;
+}
+
+@for $i from 1 through 6 {
+  $size: calc(calc(var(--size-base) / $i) + var(--size-base));
+  body h#{$i} {
+    font-size: $size;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 0 var(--size-base) rgba(0, 0, 0, 0.1);
+}
+
+.header__bd-navbar {
+  @extend .box-shadow;
+  padding: var(--size-base) 0;
+  &:after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: block;
+    content: "";
+    background-color: var(--color-white);
+  }
+  .header__bd-navbar__success {
+    color: var(--bs-success);
+  }
+  .header__bd-navbar__errors {
+    color: var(--bs-danger);
+  }
+}
+
+footer {
+  padding: var(--size-base) 0;
+  color: var(--color-grey);
+  background-color: var(--color-base);
+}
+
+.border-radius {
+  border-radius: calc(var(--size-base) * .25);
+}
+
+fieldset {
+  label {
+    display: block;
+  }
+}
+
+form {
+  .form-control,
+  .btn {
+    padding: calc(var(--size-base) * .313) var(--size-base);
+    font-size: var(--size-base);
+    font-weight: 200;
+    @extend .border-radius;
+  }
+  .invalid-feedback {
+    font-size: calc(var(--size-base) * .8);
+  }
+}
+
+.cards {
+  position: relative;
+  margin: calc(var(--size-base) * .5) 0;
+  aspect-ratio: 9/12;
+  padding: calc(var(--size-base) * .25);
+  @extend .border-radius;
+  box-shadow: 0 .2rem calc(var(--size-base) * .75) rgba(0, 0, 0, 0.35);
+  transition: transform .5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  picture {
+    position: absolute;
+    inset: calc(var(--size-base) * .25);
+    overflow: hidden;
+    @extend .border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: rotateY(180deg);
+    }
+  }
+  .cards__flip-back {
+    position: absolute;
+    inset: calc(var(--size-base) * .25);
+    @extend .border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10em;
+    font-weight: 500;
+    backface-visibility: hidden;
+    background: radial-gradient(circle, transparent 20%, var(--color-base) 20%, var(--color-base) 80%, transparent 80%, transparent), 
+                radial-gradient(circle, transparent 20%, var(--color-base) 20%, var(--color-base) 80%, transparent 80%, transparent) 2rem 2rem, 
+                linear-gradient( var(--color-primary) .2rem, transparent .2rem) 0 -.1rem, 
+                linear-gradient(90deg, var(--color-primary) .2rem, var(--color-base) .2rem) -.1rem 0;
+    background-size: 4rem 4rem, 4rem 4rem, 2rem 2rem, 2rem 2rem;
+    &:after {
+      content: "";
+      position: absolute;
+      inset: calc(var(--size-base) * .5);
+      border: .1rem solid var(--color-white);
+      opacity: .3;
+      z-index: 2;
+    }
+  }
+  &.selected,
+  &.success {
+    transform: rotateY(180deg);
+  }
+  &.success {
+    picture {
+      z-index: 999;
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+}
+
+::view-transition-old(root) {
+  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+             300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+             300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+@media (min-width: 576px) {
+  @for $i from 1 through 6 {
+    $size: calc(calc(var(--size-base) / $i) + calc(var(--size-base) * .65));
+    body h#{$i} {
+      font-size: $size;
+    }
+  }
+}

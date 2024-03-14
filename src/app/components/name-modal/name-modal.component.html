@@ -1,0 +1,28 @@
+
+<form [formGroup]="nameForm" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title">Please insert your name</h4>
+  </div>
+  <div class="modal-body">
+    <fieldset> 
+      <label for="name">
+        <legend>Name</legend>
+        <input 
+          type="text"
+          id="name"
+          #userName
+          formControlName="name"
+          class="form-control"
+          required
+          [ngClass]="{'is-invalid': submitted && form['name'].errors, 'is-valid': form['name'].errors === null}"
+        >
+        @if ( (submitted && form['name'].errors) || form['name'].touched ) {
+          <div class="invalid-feedback">Your name is required</div>
+        }
+      </label>  
+    </fieldset>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ngbAutofocus>Save</button>
+  </div>
+</form>

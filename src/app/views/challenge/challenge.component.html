@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6">
+
+      @for ( animal of animalsService.animals(); track animal.fields.image.uuid ){
+        <div class="col">
+          <div class="cards" (click)="selectCard($event, animal.fields.image.uuid)">
+            <picture>
+              <img [srcset]="animal.fields.image.url" alt="?">
+            </picture>
+            <div class="cards__flip-back"></div>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>
+
+<audio id="positive" src="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a"></audio>
+<audio id="negative" src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_multimedia_game_sound_digital_retro_simple_negative_error_descending_80629.mp3"></audio>
